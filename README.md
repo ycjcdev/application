@@ -7,6 +7,11 @@ SQLAlchemy<br>
 
 
 ## 全体の設計・構成についての説明
-## 開発環境のセットアップ手順
 
+
+## 開発環境のセットアップ手順
+applicationに移動
+$ pipenv shell<br>
+$ pipenv install Flask<br>
+$ pipenv install Flask-SQLAlchemy<br>
 
