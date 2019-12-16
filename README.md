@@ -4,7 +4,7 @@
 python<br>
 Flask<br>
 SQLAlchemy<br>
-
+SQLite3<br>
 
 ## 全体の設計・構成についての説明
 
