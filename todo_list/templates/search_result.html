@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{%block body %}
+    <form action="/dosearch" method=post class="card-body border mb-5">
+        <div class="form-group">
+            <input type="text" class="form-control"  required pattern="[^\x21-\x2C\x2E\x2F\x3A-\x40\x5B-\x60\x7B-\x7E]*" maxlength='30' name=searchname>
+        </div>
+        <button type="submit" class="btn btn-primary">検索</button>
+    </form>
+
+{% if todo_search.count > 0 %}
+    <p>ToDoが{{todo_search.count}}件見つかりました</p>
+{% endif %}
+
+{% for todo_searchresult in todo_search.data %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('show_detail', id=todo_searchresult.todo.list_id) }}" class="card-link">{{ todo_searchresult.todo.name }}</a></h5>
+            <p>リスト: {{todo_searchresult.list_name}}</p>
+            <p>期限: {{todo_searchresult.todo.deadline.strftime("%Y/%m/%d")}}</p>
+            <p>作成日: {{todo_searchresult.todo.created_at.strftime("%Y/%m/%d")}}</p>
+        </div>
+    </div>
+{% else %}
+    <p>対象のToDoは見つかりません</p>
+{% endfor %}
+<br>
+
+{% if todolist_search.count > 0 %}
+    <p>ToDoリストが{{todolist_search.count}}件見つかりました</p>
+{% endif %}
+
+{% for todolist_searchresult in todolist_search.results %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('show_detail', id=todolist_searchresult.id) }}" class="card-link">{{ todolist_searchresult.name }}</a></h5>
+            <p>作成日: {{ todolist_searchresult.created_at.strftime("%Y/%m/%d")}}</p>
+        </div>
+    </div>
+{% else %}
+    <p>対象のToDoリストは見つかりません</p>
+{% endfor %}
+
+
+{% endblock %}
+

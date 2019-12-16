@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{%block body %}
+<h2 class="ml-2 mt-2 mb-2">{{list_name}}</h2>
+<form action="/addtodo" method=post class="card-body border mb-5">
+    <div class="form-group">
+        <label>TODO名</label>
+        <input type="text" class="form-control" name=todoname required pattern="[^\x21-\x2C\x2E\x2F\x3A-\x40\x5B-\x60\x7B-\x7E]*" maxlength='30'>
+    </div>
+    <div class="form-group">
+        <label>期限</label>
+        <input type="date" class="form-control" name=deadline required style="width:200px">
+    </div>
+    <div class="form-group">
+        <input type="hidden" class="hidden" name=listid value="{{list_id}}">
+    </div>
+    <button type="submit" class="btn btn-primary">TODOの追加</button>
+</form>
+
+{% for todo in todos %}
+<div class="card">
+    <form action="/check" method=post>
+        <div class="card-body">
+            <h5 class="card-title">{{todo.name}}</h5>
+            <p>期限: {{todo.deadline.strftime("%Y/%m/%d")}}</p>
+            <p>作成日: {{todo.created_at.strftime("%Y/%m/%d")}}</p>
+            <input type="hidden" class="hidden" name=todoid value="{{ todo.id }}">
+            <input type="hidden" class="hidden" name=listid value="{{ list_id }}">
+            {% if todo.is_checked %}
+                <button type="submit" class="btn btn-primary">完了</button>
+            {% else %}
+                <button type="submit" class="btn btn-danger">未完了</button>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% else %}
+    登録されたToDoはございません
+{% endfor %}
+
+{% endblock %}
+

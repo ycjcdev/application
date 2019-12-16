@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{%block body %}
+    <form action="/addlist" method=post class="card-body border mb-5">
+        <div class="form-group">
+            <label>新しいリストを作成する</label>
+            <input type="text" class="form-control" name=listname required pattern="[^\x21-\x2C\x2E\x2F\x3A-\x40\x5B-\x60\x7B-\x7E]*" maxlength='30'>
+        </div>
+        <button type="submit" class="btn btn-primary">リストの作成</button>
+    </form>
+
+    {% for todolistdata in todolistdatas %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('show_detail', id=todolistdata.id) }}" class="card-link">{{ todolistdata.name }}</a></h5>
+            {% if todolistdata.num > 0 %}
+                <p>{{todolistdata.num}}個中{{todolistdata.checked_num}}個がチェック済み</p>
+                <p>{{todolistdata.dead_line}}</p>
+            {% else %}
+                <p>ToDoがありません</p>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    TODOリストがありません
+    {% endfor %}
+
+
+{% endblock %}
+

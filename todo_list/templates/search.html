@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{%block body %}
+    <form action="/dosearch" method=post class="card-body border mb-5">
+        <div class="form-group">
+            <input type="text" class="form-control" required pattern="[^\x21-\x2C\x2E\x2F\x3A-\x40\x5B-\x60\x7B-\x7E]*" maxlength='30' name=searchname>
+        </div>
+        <button type="submit" class="btn btn-primary">検索</button>
+    </form>
+<br>
+
+{% endblock %}
+
