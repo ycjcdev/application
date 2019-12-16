@@ -10,7 +10,7 @@ SQLite3<br>
 
 
 ## 開発環境のセットアップ手順
-applicationに移動
+application(当アプリケーション)に移動<br>
 $ pipenv shell<br>
 $ pipenv install Flask<br>
 $ pipenv install Flask-SQLAlchemy<br>
